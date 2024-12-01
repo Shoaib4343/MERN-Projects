@@ -3,7 +3,8 @@ const app = express();
 const color = require("colors")
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
-const morgon = require("morgan")
+const morgon = require("morgan");
+const authRouter = require("./routes/auth.route");
 
 // config dotenv 
 dotenv.config()
@@ -15,11 +16,12 @@ connectDB()
 app.use(morgon('dev'))
 app.use(express.json())
 
+// routes
+app.use("/api/v1/",authRouter)
 
 
-app.get("/",(req,res)=>{
-    res.send("hello word")
-})
+
+
 
 // PORT
 const PORT = process.env.PORT || 8800
